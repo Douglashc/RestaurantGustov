@@ -7,6 +7,7 @@ import { EmployeesComponent } from './employees.component';
 import { FormEmployeeComponent } from './form-employee/form-employee.component';
 import { TableEmployeeComponent } from './table-employee/table-employee.component';
 import { SearchEmployeeComponent } from './search-employee/search-employee.component';
+import { FormEditEmployeComponent } from './form-edit-employe/form-edit-employe.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { SearchEmployeeComponent } from './search-employee/search-employee.compo
     EmployeesComponent,
     FormEmployeeComponent,
     TableEmployeeComponent,
-    SearchEmployeeComponent
+    SearchEmployeeComponent,
+    FormEditEmployeComponent
   ],
   imports: [
     CommonModule,

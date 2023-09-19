@@ -16,9 +16,19 @@ export class ServiceEmplyeeService {
     return this.httpClient.get(this.url);
   }
 
+  GetEmployee(id:number)
+  {
+    return this.httpClient.get(this.url+'/getEmployee/'+id);
+  }
+
   AddEmployee(employee:Employee)
   {
     return this.httpClient.post(this.url+'/newEmployee', employee);
+  }
+
+  UpdateEmploye(employee:Employee,id:number)
+  {
+    return this.httpClient.put(this.url+'/updateEmployee/'+id, employee);
   }
 
   DeleteEmployee(id:number)

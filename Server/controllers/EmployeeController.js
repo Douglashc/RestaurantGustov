@@ -10,6 +10,19 @@ exports.allEmployees = async (req, res) => {
     }
 }
 
+exports.getEmployee = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const employee = await Employee.findByPk(id);
+        if(!employee){
+            return res.status(404).json({ error: 'Empleado no encontrado' });
+        }
+        res.json(employee);
+    }catch(error){
+        res.status(500).json({ error: error.message });
+    }
+}
+
 exports.createEmployee = async (req, res) => {
     try {
         const { names, surNames, cellPhone, startDate } = req.body;

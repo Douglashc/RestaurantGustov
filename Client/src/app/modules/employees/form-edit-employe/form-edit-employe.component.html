@@ -1,0 +1,25 @@
+<div class="container mt-4 border w-50 rounded p-4 shadow" style="background-color: #f8f9fa;">
+    <h1>Editar Empleado</h1>
+    <form>
+        <div class="form-group mb-3">
+            <label for="names">Nombres</label>
+            <input type="text" placeholder="Ingrese su nombre/s" class="form-control" id="names" [(ngModel)]="employee.names" name="names" required>
+        </div>
+        <div class="form-group mb-3">
+            <label for="surNames">Apellidos</label>
+            <input type="text" placeholder="Ingrese su apellido/s" class="form-control" id="surNames" [(ngModel)]="employee.surNames" name="surNames" required>
+        </div>
+        <div class="form-group mb-3">
+            <label for="cellPhone">Celular</label>
+            <input type="text" placeholder="Ingrese su numero de celular" class="form-control" id="cellPhone" [(ngModel)]="employee.cellPhone" name="cellPhone">
+        </div>
+        <div class="form-group mb-3">
+            <label for="startDate">Fecha de Ingreso</label>
+            <input type="date" class="form-control" id="startDate" [(ngModel)]="employee.startDate" name="startDate" required>
+        </div>
+        <div class="d-flex justify-content-center justify-content-around">
+            <button type="submit" class="btn btn-success w-25" (click)="UpdateDataEmployee()">Actualizar</button>
+            <button type="submit" routerLink="/employees" class="btn btn-primary w-25">Cancelar</button>
+        </div>
+    </form>
+</div>

@@ -24,16 +24,19 @@ export class TableEmployeeComponent implements OnInit {
   {
     this.serviceEmployeeService.GetAllEmployees().subscribe(
       res => {
-        console.log(res);
-        this.employeeList = <any>res;
+        this.employeeList = <Employee[]>res;
       },
       error => console.log(error)
     );
   }
 
+  EditEmployee(id:number)
+  {
+    this.router.navigate(['/employees/editEmployee/'+id]);
+  }
+
   OnDelete(id: number)
   {
-    console.log('ID: ', id);
     this.serviceEmployeeService.DeleteEmployee(id).subscribe(
       res => {
         alert("Empleado eliminado");

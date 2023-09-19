@@ -27,7 +27,7 @@
                 <td>{{employee.cellPhone}}</td>
                 <td>{{employee.startDate | date:'yyyy-MM-dd'}}</td>
                 <td>
-                    <button class="btn btn-warning">Editar</button>
+                    <button class="btn btn-warning" (click)="employee.id !== undefined ? EditEmployee(employee.id) : null">Editar</button>
                     <button class="btn btn-danger m-2" (click)="employee.id !== undefined ? OnDelete(employee.id) : null">Eliminar</button>
                 </td>
             </tr>
