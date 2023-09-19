@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Employee } from 'src/app/interfaces/Employee';
 
 @Component({
   selector: 'app-form-employee',
@@ -6,6 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./form-employee.component.scss']
 })
 export class FormEmployeeComponent implements OnInit {
+
+  employee: Employee = {
+    id: 0,
+    names: '',
+    surNames: '',
+    startDate: new Date
+  }; 
 
   constructor() { }
 

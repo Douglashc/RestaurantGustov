@@ -1,1 +1,36 @@
-<h1>TABLA DE EMPLEADO</h1>
+<div class="p-5">
+
+    <div class="d-flex justify-content-between mb-3">
+        <!-- Buscador -->
+        <div class="input-group w-25">
+          <input type="text" class="form-control" placeholder="Buscar...">
+        </div>
+    
+        <!-- Botón -->
+        <button class="btn btn-success" routerLink="/employees/createEmployee">Nuevo Empleado</button>
+      </div>
+
+    <table class="table border">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre Completo</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Fecha Ingreso</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let employee of employeeList">
+                <th scope="row">{{employee.id}}</th>
+                <td>{{employee.names}} {{employee.surNames}}</td>
+                <td>{{employee.cellPhone}}</td>
+                <td>{{employee.startDate}}</td>
+                <td>
+                    <button class="btn btn-warning">Editar</button>
+                    <button class="btn btn-danger m-2">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
