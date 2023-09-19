@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { VacationRoutingModule } from './vacation-routing.module';
 import { VacationComponent } from './vacation.component';
@@ -17,7 +18,8 @@ import { SearchVacationComponent } from './search-vacation/search-vacation.compo
   ],
   imports: [
     CommonModule,
-    VacationRoutingModule
+    VacationRoutingModule,
+    FormsModule
   ]
 })
 export class VacationModule { }

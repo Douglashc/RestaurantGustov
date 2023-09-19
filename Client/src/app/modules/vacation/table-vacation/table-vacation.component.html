@@ -1,1 +1,40 @@
-<p>table-vacation works!</p>
+<div class="p-5">
+
+    <div class="d-flex justify-content-between mb-3">
+        <!-- Buscador -->
+        <div class="input-group w-25">
+          <input type="text" class="form-control" placeholder="Buscar...">
+        </div>
+    
+        <!-- Botón -->
+        <button class="btn btn-success">+ Nueva Vacacion</button>
+      </div>
+
+    <table class="table border">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre Completo</th>
+                <th scope="col">Fecha Inicio</th>
+                <th scope="col">Fecha Fin</th>
+                <th scope="col">Dias</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let vacationRequest of vacationRequestList">
+                <th scope="row">{{vacationRequest.id}}</th>
+                <td>{{vacationRequest.Employee.names}} {{vacationRequest.Employee.surNames}}</td>
+                <td>{{vacationRequest.startDateVacation | date:'yyyy-MM-dd'}}</td>
+                <td>{{vacationRequest.endDateVacation}}</td>
+                <td>{{0}}</td>
+                <td>{{vacationRequest.status}}</td>
+                <td>
+                    <button class="btn btn-warning" (click)="vacationRequest.id !== undefined ? EditVacationRequest(vacationRequest.id) : null">Editar</button>
+                    <button class="btn btn-danger m-2" (click)="vacationRequest.id !== undefined ? OnDeleteVacationRequest(vacationRequest.id) : null">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

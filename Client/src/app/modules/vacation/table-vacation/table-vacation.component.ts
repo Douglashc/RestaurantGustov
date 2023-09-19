@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { VacationRequestEmployee } from 'src/app/interfaces/VacationRequestEmployee';
+import { VacationRequestService } from 'src/app/services/vacation-request.service';
 
 @Component({
   selector: 'app-table-vacation',
@@ -7,9 +9,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TableVacationComponent implements OnInit {
 
-  constructor() { }
+  vacationRequestList: VacationRequestEmployee[];
 
-  ngOnInit(): void {
+  constructor(private vacationRequestService: VacationRequestService) { 
+    this.vacationRequestList = []
   }
 
+  ngOnInit(): void {
+    this.ListAllEmployees();
+  }
+
+  ListAllEmployees()
+  {
+    this.vacationRequestService.GetAllVacationRequests().subscribe(
+      res => {
+        this.vacationRequestList = <VacationRequestEmployee[]>res;
+      },
+      error => console.log(error)
+    );
+  }
+
+  EditVacationRequest(id:number)
+  {
+
+  }
+
+  OnDeleteVacationRequest(id:number)
+  {
+
+  }
 }
