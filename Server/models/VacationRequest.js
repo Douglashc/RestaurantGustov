@@ -1,10 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
     const VacationRequest = sequelize.define('VacationRequest', {
-      startDate: {
+      startDateVacation: {
         type: DataTypes.DATEONLY,
         allowNull: false,
       },
-      endDate: {
+      endDateVacation: {
         type: DataTypes.DATEONLY,
         allowNull: false,
       },
