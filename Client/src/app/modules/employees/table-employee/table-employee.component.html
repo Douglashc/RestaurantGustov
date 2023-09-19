@@ -25,10 +25,10 @@
                 <th scope="row">{{employee.id}}</th>
                 <td>{{employee.names}} {{employee.surNames}}</td>
                 <td>{{employee.cellPhone}}</td>
-                <td>{{employee.startDate}}</td>
+                <td>{{employee.startDate | date:'yyyy-MM-dd'}}</td>
                 <td>
                     <button class="btn btn-warning">Editar</button>
-                    <button class="btn btn-danger m-2">Eliminar</button>
+                    <button class="btn btn-danger m-2" (click)="employee.id !== undefined ? OnDelete(employee.id) : null">Eliminar</button>
                 </td>
             </tr>
         </tbody>

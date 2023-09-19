@@ -15,4 +15,14 @@ export class ServiceEmplyeeService {
   {
     return this.httpClient.get(this.url);
   }
+
+  AddEmployee(employee:Employee)
+  {
+    return this.httpClient.post(this.url+'/newEmployee', employee);
+  }
+
+  DeleteEmployee(id:number)
+  {
+    return this.httpClient.delete(this.url+'/deleteEmployee/'+id)
+  }
 }
