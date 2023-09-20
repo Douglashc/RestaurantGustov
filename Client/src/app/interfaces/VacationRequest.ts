@@ -5,4 +5,5 @@ export interface VacationRequest{
     startDateVacation?: Date;
     endDateVacation?: Date;
     status?: 'Activo' | 'Expirado' | 'Pendiente';
+    EmployeeId?: number;
 }

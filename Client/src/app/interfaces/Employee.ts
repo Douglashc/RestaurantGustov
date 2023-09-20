@@ -3,5 +3,6 @@ export interface Employee {
     names?: string,
     surNames?: string,
     cellPhone?: string,
-    startDate?: Date
+    startDate?: Date,
+    vacationDays?: number
 }

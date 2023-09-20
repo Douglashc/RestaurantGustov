@@ -1,1 +1,24 @@
-<p>form-vacation works!</p>
+<div class="container mt-4 border w-50 rounded p-4 shadow" style="background-color: #f8f9fa;">
+    <h1>Nueva vacacion</h1>
+    <form>
+        <div class="form-group mb-3">
+            <label for="EmployeeId">Empleado</label>
+            <select class="form-control" id="EmployeeId" [(ngModel)]="vacationRequest.EmployeeId" name="EmployeeId" required>
+                <option value="" disabled selected>Seleccione el empleado que solicita su vacación</option>
+                <option *ngFor="let employee of employeeList" [value]="employee.id">{{ employee.names }} {{ employee.surNames }}</option>
+            </select>
+        </div>
+        <div class="form-group mb-3">
+            <label for="startDateVacation">Fecha de Inicio de Vacacion</label>
+            <input type="date" class="form-control" id="startDateVacation" [(ngModel)]="vacationRequest.startDateVacation" name="startDateVacation" required>
+        </div>
+        <div class="form-group mb-3">
+            <label for="endDateVacation">Fecha de Fin de Vacacion</label>
+            <input type="date" class="form-control" id="endtDateVacation" [(ngModel)]="vacationRequest.endDateVacation" name="endDateVacation" required>
+        </div>
+        <div class="d-flex justify-content-center justify-content-around">
+            <button type="submit" class="btn btn-success w-25" (click)="CreateNewVacationRequest()">Registrar</button>
+            <button type="submit" routerLink="/vacation" class="btn btn-primary w-25">Cancelar</button>
+        </div>
+    </form>
+</div>

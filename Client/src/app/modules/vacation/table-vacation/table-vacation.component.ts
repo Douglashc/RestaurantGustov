@@ -16,10 +16,10 @@ export class TableVacationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.ListAllEmployees();
+    this.ListAllVacationRequest();
   }
 
-  ListAllEmployees()
+  ListAllVacationRequest()
   {
     this.vacationRequestService.GetAllVacationRequests().subscribe(
       res => {
@@ -34,8 +34,14 @@ export class TableVacationComponent implements OnInit {
 
   }
 
-  OnDeleteVacationRequest(id:number)
+  OnDeleteVacationRequest(id: number)
   {
-
+    this.vacationRequestService.DeleteVacationRequest(id).subscribe(
+      res => {
+        alert("Vacacion eliminado");
+        this.ListAllVacationRequest();
+      },
+      error => console.log(error)
+    )
   }
 }

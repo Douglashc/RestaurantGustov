@@ -1,6 +1,24 @@
 const db = require('../models/Conexion');
 const Employee = db.employee;
 
+const moment = require('moment')
+
+function calculateVacationDays(startDate) {
+    const startDateMoment = moment(startDate);
+    const currentDate = moment();
+    const yearsWorked = currentDate.diff(startDateMoment, 'years');
+
+    if (yearsWorked >= 1 && yearsWorked <= 5) {
+        return 15;
+    } else if (yearsWorked >= 6 && yearsWorked <= 10) {
+        return 20;
+    } else if (yearsWorked >= 11) {
+        return 30;
+    } else {
+        return 0;
+    }
+}
+
 exports.allEmployees = async (req, res) => {
     try {
         const employees = await Employee.findAll({});
@@ -27,6 +45,11 @@ exports.createEmployee = async (req, res) => {
     try {
         const { names, surNames, cellPhone, startDate } = req.body;
         const employee = await Employee.create({ names, surNames, cellPhone,startDate });
+
+        const vacationDays = calculateVacationDays(startDate);
+
+        await employee.update({ vacationDays });
+
         res.json(employee);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -41,7 +64,9 @@ exports.updateEmployee = async (req, res) => {
         if (!employee) {
             return res.status(404).json({ error: 'Empleado no encontrado' });
         }
-        await employee.update({ names, surNames, cellPhone, startDate });
+        const vacationDays = calculateVacationDays(startDate);
+
+        await employee.update({ names, surNames, cellPhone, startDate, vacationDays });
         res.json({ message: 'Empleado actualizado exitosamente' });
     } catch (error) {
         res.status(500).json({ error: error.message });

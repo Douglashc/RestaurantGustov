@@ -7,6 +7,7 @@ import { VacationComponent } from './vacation.component';
 import { FormVacationComponent } from './form-vacation/form-vacation.component';
 import { TableVacationComponent } from './table-vacation/table-vacation.component';
 import { SearchVacationComponent } from './search-vacation/search-vacation.component';
+import { FormEditVacationRequestComponent } from './form-edit-vacation-request/form-edit-vacation-request.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { SearchVacationComponent } from './search-vacation/search-vacation.compo
     VacationComponent,
     FormVacationComponent,
     TableVacationComponent,
-    SearchVacationComponent
+    SearchVacationComponent,
+    FormEditVacationRequestComponent
   ],
   imports: [
     CommonModule,

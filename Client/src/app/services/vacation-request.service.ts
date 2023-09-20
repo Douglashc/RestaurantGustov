@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { VacationRequest } from '../interfaces/VacationRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,16 @@ export class VacationRequestService {
   GetAllVacationRequests()
   {
     return this.httpClient.get(this.url);
+  }
+
+  AddVacationRequest(vacationRequest:VacationRequest)
+  {
+    return this.httpClient.post(this.url+'/newVacationRequest', vacationRequest);
+  }
+
+  DeleteVacationRequest(id:number)
+  {
+    return this.httpClient.delete(this.url+'/deleteVacationRequest/'+id)
   }
 }
 

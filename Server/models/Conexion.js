@@ -21,7 +21,9 @@ db.sequelize = sequelize;
 db.employee = require('./Employee')(sequelize, DataTypes);
 db.vacationRequest = require('./VacationRequest')(sequelize, DataTypes);
 
-db.employee.hasMany(db.vacationRequest);
+db.employee.hasMany(db.vacationRequest, {
+    onDelete: 'CASCADE',
+});
 db.vacationRequest.belongsTo(db.employee);
 
 sequelize.sync({ force: false }).then(() => {
