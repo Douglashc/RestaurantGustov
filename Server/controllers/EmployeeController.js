@@ -1,8 +1,8 @@
 const db = require('../models/Conexion');
 const Employee = db.employee;
-
 const moment = require('moment')
 
+// Devuelve todos los empleados
 exports.allEmployees = async (req, res) => {
     try {
         const employees = await Employee.findAll({});
@@ -12,6 +12,7 @@ exports.allEmployees = async (req, res) => {
     }
 }
 
+// Devuelve un empleado por su ID
 exports.getEmployee = async (req, res) => {
     const { id } = req.params;
     try {
@@ -25,14 +26,16 @@ exports.getEmployee = async (req, res) => {
     }
 }
 
+// Crea un nuevo empleado
 exports.createEmployee = async (req, res) => {
     try {
         const { names, surNames, cellPhone, startDate } = req.body;
-        const employee = await Employee.create({ names, surNames, cellPhone,startDate });
-
+        
+        // Calcula los días de vacaciones basados en la fecha de inicio
         const vacationDays = calculateVacationDays(startDate);
 
-        await employee.update({ vacationDays });
+        //Registro de los datos del empleado
+        const employee = await Employee.create({ names, surNames, cellPhone, startDate, vacationDays });
 
         res.json(employee);
     } catch (error) {
@@ -40,6 +43,7 @@ exports.createEmployee = async (req, res) => {
     }
 };
 
+// Actualiza un empleado
 exports.updateEmployee = async (req, res) => {
     const { id } = req.params;
     const { names, surNames, cellPhone, startDate } = req.body;
@@ -48,15 +52,20 @@ exports.updateEmployee = async (req, res) => {
         if (!employee) {
             return res.status(404).json({ error: 'Empleado no encontrado' });
         }
+
+        // Calcula los días de vacaciones basados en la fecha de inicio
         const vacationDays = calculateVacationDays(startDate);
 
+        // Actualiza los datos del empleado
         await employee.update({ names, surNames, cellPhone, startDate, vacationDays });
+
         res.json({ message: 'Empleado actualizado exitosamente' });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 };
 
+// Elimina un empleado
 exports.deleteEmployee = async (req, res) => {
     const { id } = req.params;
     try {
@@ -71,6 +80,7 @@ exports.deleteEmployee = async (req, res) => {
     }
 };
 
+// Función para calcular los días de vacaciones segun la fecha de inicio
 function calculateVacationDays(startDate) {
     const startDateMoment = moment(startDate);
     const currentDate = moment();

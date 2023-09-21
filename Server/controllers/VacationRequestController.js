@@ -4,9 +4,13 @@ const Employee = db.employee;
 
 const moment = require('moment');
 
+// Obtener todas las solicitudes de vacaciones
 exports.allVacationRequest = async (req, res) => {
     try {
+        // Actualizar los estados de las solicitudes de vacaciones
         await updateStatusRequestVacation();
+        
+        // Obtener todas las solicitudes de vacaciones con información de empleados
         const vacationRequests = await VacationRequest.findAll({
             include: [{
                 model: Employee,
@@ -19,15 +23,21 @@ exports.allVacationRequest = async (req, res) => {
     }
 }
 
+// Crear una nueva solicitud de vacaciones
 exports.createVacationRequest = async (req, res) => {
     try {
         const { startDateVacation, EmployeeId } = req.body;
 
+        // Obtener el empleado asociado a la solicitud
         const employee = await Employee.findByPk(EmployeeId);
 
+        // Calcular la fecha de finalización de las vacacion
         const endDateVacation = calculateEndDate(startDateVacation, employee.vacationDays);
+
+        // Determinar el estado de la solicitud de vacaciones
         const status = determineStatus(startDateVacation, endDateVacation);
 
+        // Crear la nueva solicitud de vacaciones
         const vacationRequest = await VacationRequest.create({ startDateVacation, endDateVacation, status, EmployeeId });
         res.json(vacationRequest);
     } catch (error) {
@@ -35,6 +45,7 @@ exports.createVacationRequest = async (req, res) => {
     }
 };
 
+// Eliminar una solicitud de vacaciones
 exports.deleteVacationRequest = async (req, res) => {
     const { id } = req.params;
     try {
@@ -49,10 +60,12 @@ exports.deleteVacationRequest = async (req, res) => {
     }
 };
 
+// Calcular la fecha de finalización de las vacaciones
 function calculateEndDate(startDate, vacationDays) {
     return moment(startDate).add(vacationDays, 'days').format('YYYY-MM-DD');
 }
 
+// Determinar el estado de la solicitud de vacaciones
 function determineStatus(startDate, endDate) {
     const currentDate = moment().format('YYYY-MM-DD');
 
@@ -65,16 +78,19 @@ function determineStatus(startDate, endDate) {
     }
 }
 
+// Actualizar automáticamente los estados de las solicitudes de vacaciones
 const updateStatusRequestVacation = async () => {
     try {
         const currentDate = moment().format('YYYY-MM-DD');
 
+        // Actualizar solicitudes de vacaciones con estado 'Activo' si la fecha de inicio es igual a la fecha actual
         await VacationRequest.update( { status: 'Activo' },
             {
                 where: { startDateVacation: currentDate }
             }
         );
 
+        // Actualizar solicitudes de vacaciones con estado 'Expirado' si la fecha de finalización es igual a la fecha actual
         await VacationRequest.update({ status: 'Expirado' },
             {
                 where: { endDateVacation: currentDate }
@@ -85,4 +101,3 @@ const updateStatusRequestVacation = async () => {
         console.error('Error al actualizar estados:', error);
     }
 };
-

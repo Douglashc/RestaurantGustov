@@ -1,3 +1,5 @@
+// Definición del modelo VacationRequest
+
 module.exports = (sequelize, DataTypes) => {
     const VacationRequest = sequelize.define('VacationRequest', {
       startDateVacation: {

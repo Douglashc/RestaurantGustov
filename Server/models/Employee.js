@@ -1,3 +1,5 @@
+// Definición del modelo Employee
+
 module.exports = (sequelize, DataTypes) => {
     const Employee = sequelize.define('Employee', {
         names: {
