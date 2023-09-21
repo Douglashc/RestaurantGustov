@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { VacationRequestEmployee } from 'src/app/interfaces/VacationRequestEmployee';
 import { VacationRequestService } from 'src/app/services/vacation-request.service';
 
@@ -11,7 +12,7 @@ export class TableVacationComponent implements OnInit {
 
   vacationRequestList: VacationRequestEmployee[];
 
-  constructor(private vacationRequestService: VacationRequestService) { 
+  constructor(private vacationRequestService: VacationRequestService, private router: Router) { 
     this.vacationRequestList = []
   }
 
@@ -27,11 +28,6 @@ export class TableVacationComponent implements OnInit {
       },
       error => console.log(error)
     );
-  }
-
-  EditVacationRequest(id:number)
-  {
-
   }
 
   OnDeleteVacationRequest(id: number)

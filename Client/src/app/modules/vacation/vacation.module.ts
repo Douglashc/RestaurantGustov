@@ -6,17 +6,12 @@ import { VacationRoutingModule } from './vacation-routing.module';
 import { VacationComponent } from './vacation.component';
 import { FormVacationComponent } from './form-vacation/form-vacation.component';
 import { TableVacationComponent } from './table-vacation/table-vacation.component';
-import { SearchVacationComponent } from './search-vacation/search-vacation.component';
-import { FormEditVacationRequestComponent } from './form-edit-vacation-request/form-edit-vacation-request.component';
-
 
 @NgModule({
   declarations: [
     VacationComponent,
     FormVacationComponent,
-    TableVacationComponent,
-    SearchVacationComponent,
-    FormEditVacationRequestComponent
+    TableVacationComponent
   ],
   imports: [
     CommonModule,

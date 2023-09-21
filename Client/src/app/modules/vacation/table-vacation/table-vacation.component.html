@@ -1,12 +1,9 @@
 <div class="p-5">
 
     <div class="d-flex justify-content-between mb-3">
-        <!-- Buscador -->
         <div class="input-group w-25">
-          <input type="text" class="form-control" placeholder="Buscar...">
+          <h1>Lista de Vacaciones</h1>
         </div>
-    
-        <!-- Botón -->
         <button class="btn btn-success" routerLink="/vacation/createVacationRequest">+ Nueva Vacacion</button>
       </div>
 
@@ -15,8 +12,8 @@
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Nombre Completo</th>
-                <th scope="col">Fecha Inicio</th>
-                <th scope="col">Fecha Fin</th>
+                <th scope="col">Fecha Inicio Vacacion</th>
+                <th scope="col">Fecha Fin Vacacion</th>
                 <th scope="col">Dias</th>
                 <th scope="col">Estado</th>
                 <th scope="col">Acciones</th>
@@ -31,7 +28,6 @@
                 <td>{{0}}</td>
                 <td>{{vacationRequest.status}}</td>
                 <td>
-                    <button class="btn btn-warning" (click)="vacationRequest.id !== undefined ? EditVacationRequest(vacationRequest.id) : null">Editar</button>
                     <button class="btn btn-danger m-2" (click)="vacationRequest.id !== undefined ? OnDeleteVacationRequest(vacationRequest.id) : null">Eliminar</button>
                 </td>
             </tr>

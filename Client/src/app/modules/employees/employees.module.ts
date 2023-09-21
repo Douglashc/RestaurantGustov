@@ -6,17 +6,14 @@ import { EmployeesRoutingModule } from './employees-routing.module';
 import { EmployeesComponent } from './employees.component';
 import { FormEmployeeComponent } from './form-employee/form-employee.component';
 import { TableEmployeeComponent } from './table-employee/table-employee.component';
-import { SearchEmployeeComponent } from './search-employee/search-employee.component';
 import { FormEditEmployeComponent } from './form-edit-employe/form-edit-employe.component';
-
 
 @NgModule({
   declarations: [
     EmployeesComponent,
     FormEmployeeComponent,
     TableEmployeeComponent,
-    SearchEmployeeComponent,
-    FormEditEmployeComponent
+    FormEditEmployeComponent,
   ],
   imports: [
     CommonModule,
