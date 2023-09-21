@@ -6,6 +6,7 @@ const moment = require('moment');
 
 exports.allVacationRequest = async (req, res) => {
     try {
+        await updateStatusRequestVacation();
         const vacationRequests = await VacationRequest.findAll({
             include: [{
                 model: Employee,
@@ -18,50 +19,6 @@ exports.allVacationRequest = async (req, res) => {
     }
 }
 
-exports.getVacationRequest = async (req, res) => {
-    const { id } = req.params;
-    try {
-        const vacationRequest = await VacationRequest.findByPk(id, {
-            include: [{
-                model: Employee,
-                attributes: ['names', 'surNames', 'cellPhone', 'startDate']
-            }]
-        });
-        if(!vacationRequest){
-            return res.status(404).json({ error: 'Solicitud de vacacion no encontrada' });
-        }
-        res.json(vacationRequest);
-    }catch(error){
-        res.status(500).json({ error: error.message });
-    }
-}
-
-/*exports.createVacationRequest = async (req, res) => {
-    try {
-        const { startDateVacation, EmployeeId } = req.body;
-
-        const employee = await Employee.findByPk(EmployeeId);
-
-        const vacationDays = employee.vacationDays;
-        const endDateVacation = moment(startDateVacation).add(vacationDays, 'days').format('YYYY-MM-DD');
-
-        const currentDate = moment().format('YYYY-MM-DD');
-        let status;
-        if (moment(endDateVacation).isBefore(currentDate)) {
-            status = 'Expirado';
-        } else if(moment(startDateVacation).isAfter(currentDate)){
-            status = 'Pendiente';
-        } 
-        else {
-            status = 'Activo';
-        }
-
-        const vacationRequest = await VacationRequest.create({ startDateVacation, endDateVacation, status, EmployeeId });
-        res.json(vacationRequest);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-};*/
 exports.createVacationRequest = async (req, res) => {
     try {
         const { startDateVacation, EmployeeId } = req.body;
@@ -107,3 +64,25 @@ function determineStatus(startDate, endDate) {
         return 'Activo';
     }
 }
+
+const updateStatusRequestVacation = async () => {
+    try {
+        const currentDate = moment().format('YYYY-MM-DD');
+
+        await VacationRequest.update( { status: 'Activo' },
+            {
+                where: { startDateVacation: currentDate }
+            }
+        );
+
+        await VacationRequest.update({ status: 'Expirado' },
+            {
+                where: { endDateVacation: currentDate }
+            }
+        );
+        
+    } catch (error) {
+        console.error('Error al actualizar estados:', error);
+    }
+};
+

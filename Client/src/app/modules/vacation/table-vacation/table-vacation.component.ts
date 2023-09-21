@@ -40,4 +40,5 @@ export class TableVacationComponent implements OnInit {
       error => console.log(error)
     )
   }
+
 }

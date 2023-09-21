@@ -10,11 +10,10 @@
     <table class="table border">
         <thead>
             <tr>
-                <th scope="col">ID</th>
+                <th scope="col">Nro</th>
                 <th scope="col">Nombre Completo</th>
                 <th scope="col">Fecha Inicio Vacacion</th>
                 <th scope="col">Fecha Fin Vacacion</th>
-                <th scope="col">Dias</th>
                 <th scope="col">Estado</th>
                 <th scope="col">Acciones</th>
             </tr>
@@ -25,8 +24,13 @@
                 <td>{{vacationRequest.Employee.names}} {{vacationRequest.Employee.surNames}}</td>
                 <td>{{vacationRequest.startDateVacation | date:'yyyy-MM-dd'}}</td>
                 <td>{{vacationRequest.endDateVacation}}</td>
-                <td>{{0}}</td>
-                <td>{{vacationRequest.status}}</td>
+                <td>
+                    <div [ngClass]="{'expirado': vacationRequest.status === 'Expirado', 
+                                    'activo': vacationRequest.status === 'Activo', 
+                                    'pendiente': vacationRequest.status === 'Pendiente'}">
+                        {{vacationRequest.status}}
+                    </div>
+                </td>
                 <td>
                     <button class="btn btn-danger m-2" (click)="vacationRequest.id !== undefined ? OnDeleteVacationRequest(vacationRequest.id) : null">Eliminar</button>
                 </td>

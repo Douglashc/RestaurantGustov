@@ -15,6 +15,7 @@ export class ReceiptService {
     doc.text(`Nombre del Empleado: ${employee.names} ${employee.surNames}`, 10, 20);
     doc.text(`Fecha de Inicio: ${startDate}`, 10, 30);
     doc.text(`Fecha de Fin: ${endDate}`, 10, 40);
+    doc.text(`Dias Totales de Vacacion: ${employee.vacationDays}`, 10, 50);
     
     return doc;
   }

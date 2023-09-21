@@ -87,10 +87,11 @@ export class FormVacationComponent implements OnInit {
 
   getMinDate(): string {
     const today = new Date();
-    const month = today.getMonth() + 1; // Agregamos 1 porque los meses empiezan desde 0
+    const month = today.getMonth() + 1;
     const day = today.getDate();
     const formattedMonth = month < 10 ? `0${month}` : month.toString();
     const formattedDay = day < 10 ? `0${day}` : day.toString();
+    
     return `${today.getFullYear()}-${formattedMonth}-${formattedDay}`;
   }
 

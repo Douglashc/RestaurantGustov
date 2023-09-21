@@ -3,22 +3,6 @@ const Employee = db.employee;
 
 const moment = require('moment')
 
-function calculateVacationDays(startDate) {
-    const startDateMoment = moment(startDate);
-    const currentDate = moment();
-    const yearsWorked = currentDate.diff(startDateMoment, 'years');
-
-    if (yearsWorked >= 1 && yearsWorked <= 5) {
-        return 15;
-    } else if (yearsWorked >= 6 && yearsWorked <= 10) {
-        return 20;
-    } else if (yearsWorked >= 11) {
-        return 30;
-    } else {
-        return 0;
-    }
-}
-
 exports.allEmployees = async (req, res) => {
     try {
         const employees = await Employee.findAll({});
@@ -86,3 +70,19 @@ exports.deleteEmployee = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
+function calculateVacationDays(startDate) {
+    const startDateMoment = moment(startDate);
+    const currentDate = moment();
+    const yearsWorked = currentDate.diff(startDateMoment, 'years');
+
+    if (yearsWorked >= 1 && yearsWorked <= 5) {
+        return 15;
+    } else if (yearsWorked >= 6 && yearsWorked <= 10) {
+        return 20;
+    } else if (yearsWorked >= 11) {
+        return 30;
+    } else {
+        return 0;
+    }
+}
